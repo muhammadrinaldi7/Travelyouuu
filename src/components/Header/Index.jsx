@@ -1,43 +1,81 @@
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export const Header = () => {
+    const [open, setOpen] = useState(false);
+    const handleToggle = () => setOpen(!open)
     return (
-        <header className="bg-white shadow-sm">
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center">
-                        <div className="flex-shrink-0">
-                            <img
-                                className="w-8 h-8"
-                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                                alt="Workflow"
-                            />
-                        </div>
-                        <div className="hidden md:block">
-                            <div className="flex items-baseline ml-10 space-x-4">
-                                <a
-                                    href="#banner"
-                                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                                >
-                                    Home
-                                </a>
-
-                                <a
-                                    href="#about"
-                                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                                >
-                                    About
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                                >
-                                    Contact
-                                </a>
-                            </div>
-                        </div>
+    <header className="bg-transparent">
+        <div className="w-full">
+            {/* NavMobile */}
+            <div className="fixed top-0 z-30 flex items-center justify-between w-full h-16 px-6 bg-transparent md:hidden">
+                <div className="">
+                    <a className="block" href="#">
+                    <h1 className="text-2xl font-bold font-logo text-primary-300 ">TravelYouuu</h1>
+                    </a>
+                </div>
+                <div className="flex flex-col gap-10">
+                    <div>
+                        <button type="button" className="text-gray-500 hover:text-gray-500/75" onClick={handleToggle}>
+                            <span className="sr-only">Toggle navigation</span>
+                            <FontAwesomeIcon className="w-6 h-6 font-bold text-gray-600" icon={faBars} />
+                        </button>
+                    </div>
+                    <div className={`fixed px-8 py-4 rounded-lg bg-gray-50/70 right-4 top-20 ${open ? 'block' : 'hidden'}`}>
+                        <ul className="flex flex-col gap-2">
+                            <li>
+                                <a href="#"> Home </a>
+                            </li>
+                            <li>
+                                <a href="#"> About </a>
+                            </li>
+                            <li>
+                                <a href="#"> Destination </a>
+                            </li>
+                            <li>
+                                <a href="#"> Exclusive Tour </a>
+                            </li>
+                            <li>
+                                <a href="#"> Review </a>
+                            </li>
+                            <li>
+                                <Link to="/login" className="text-red-400"> Login </Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </header>
+            {/* NavDesktop */}
+            <div className="items-center justify-center hidden w-full px-6 bg-transparent h-14 md:flex md:w-full">
+                <div className="flex flex-row justify-between max-w-screen-xl gap-16 p-2 rounded-lg bg-white/65">
+                    <ul className="flex flex-row justify-center gap-8 font-thin text-black/85 ">
+                        <li>
+                            <Link to="/" className="p-2 rounded-md hover:text-white hover:bg-primary-100"> Home </Link>
+                        </li>
+                        <li>
+                            <a href="#about" className="p-2 rounded-md hover:text-white hover:bg-primary-100"> About </a>
+                        </li>
+                        <li>
+                            <a href="#" className="p-2 rounded-md hover:text-white hover:bg-primary-100"> Destination </a>
+                        </li>
+                    </ul>
+                    <h1 className="text-xl font-bold text-primary-300 drop-shadow-md font-logo ">TravelYouuu</h1>
+                    <ul className="flex flex-row justify-center gap-8 font-thin text-black/85 ">
+                        <li>
+                            <a href="#" className="p-2 rounded-md hover:text-white hover:bg-primary-100"> Exclusive Tour </a>
+                        </li>
+                        <li>
+                            <a href="#" className="p-2 rounded-md hover:text-white hover:bg-primary-100"> Review </a>
+                        </li>
+                        <li>
+                            <Link to="/login" className="p-2 text-white rounded-md hover:text-black hover:bg-red-400 bg-secondary-100"> Login </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
     );
 };
